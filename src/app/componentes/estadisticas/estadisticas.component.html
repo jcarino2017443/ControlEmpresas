@@ -1,0 +1,31 @@
+<br/>
+<div class="container">
+    <select [(ngModel)]="chartInicial">
+        <option *ngFor="let num of chartTypes; index as posicion" [value]="num.nombreTipo">{{posicion+1}}-{{num.texto}}</option>
+    </select>
+    <div style="display: block;">
+        <canvas baseChart
+          [chartType]="chartInicial"
+          [data]="chartData"
+          [colors]="chartColors"
+          [labels]="chartLabels"
+          [options]="chartOptions"
+          [plugins]="chartPlugins"
+          [legend]="chartLegend">
+        </canvas>
+      </div>
+      
+      <br/>
+      <h4 [hidden]="largo" style="text-align: center;">No hay ventas mayores a 8 unidades</h4>
+      <div class="row">
+        <div class="col-sm-6" *ngFor="let estadistica of resultadoList">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nombre: {{estadistica.nombre}}</h5>
+              <p class="card-text">Vendido: {{estadistica.vendido}}</p>
+            </div>
+          </div>
+          <br/>
+        </div>
+      </div>
+</div>

@@ -1,0 +1,106 @@
+<br/>
+<div class="container">
+    
+    <div class="d-flex justify-content-center">
+        <button  style="background-color: black; border: none; width: 50%;" data-bs-toggle="modal" data-bs-target="#modalAgregar" class="btn btn-primary" type="button"><i class="bi bi-plus-square"></i></button>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6" *ngFor="let empresa of empresaList">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">nombre: {{empresa.nombre}}</h5>
+              <p class="card-text">Propietario: {{empresa.propietario}}</p>
+              <a  class="btn btn-primary" type="button" id="dropdownSetting" data-bs-toggle="dropdown" aria-expanded="false">Opciones</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownSetting">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditarEmpresa" (click)="obtenerEmpresaId(empresa._id)">Editar</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEliminarEmpresa" (click)="obtenerEmpresaId(empresa._id)">Eliminar</a></li>
+
+              </ul>
+            </div>
+          </div>
+          <br/>
+        </div>
+      </div>
+
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarEmpresa" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAgregarEmpresa">Modal title</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputNombre1" class="form-label">Creacion Empresas</label>
+            <input type="text" class="form-control" id="exampleInputNombre1" aria-describedby="emailHelp"
+            name="nombre" #nombre="ngModel" [(ngModel)]="ModelEmpresa.nombre">
+            
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Propietario</label>
+            <input type="text" class="form-control" id="exampleInputPassword1"
+            name="propietario" #propietario="ngModel" [(ngModel)]="ModelEmpresa.propietario">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="registrarEmpresa()">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Editar -->
+<div class="modal fade" id="modalEditarEmpresa" tabindex="-1" aria-labelledby="modalEditarEmpresa" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditarEmpresa">Editar Empresa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputNombre1" class="form-label">Creacion Empresas</label>
+            <input type="text" class="form-control" id="exampleInputNombre1" aria-describedby="emailHelp"
+            name="nombre" #nombre="ngModel" [(ngModel)]="empresaModel.nombre">
+            
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Propietario</label>
+            <input type="text" class="form-control" id="exampleInputPassword1"
+            name="propietario" #propietario="ngModel" [(ngModel)]="empresaModel.propietario" disabled>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editarEmpresa()">Editar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Eliminar -->
+<div class="modal fade" id="modalEliminarEmpresa" tabindex="-1" aria-labelledby="modalEliminarEmpresa" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEliminarEmpresa">Eliminar Empresa</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estas seguro de eliminar la Empresa {{empresaModel.nombre}}?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="eliminarEmpresa(empresaModel._id)">Si</button>
+      </div>
+    </div>
+  </div>
+</div>

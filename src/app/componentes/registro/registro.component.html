@@ -1,0 +1,41 @@
+<br/>
+<br/>
+<div class="container">
+    <div class="row justify-content-md-center">
+        <div class="col-md-5">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputName" class="form-label">Nombre</label>
+                    <input type="text" id="exampleInputNamet" class="form-control" placeholder="Escribe un nombre"
+                    name="nombre" #nombre="ngModel" [(ngModel)]="usuarioModel.nombre">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputUsername" class="form-label">UserName</label>
+                    <input type="text" id="exampleInputUsername" class="form-control" placeholder="Escribe un UserName"
+                    name="username" #username="ngModel" [(ngModel)]="usuarioModel.username">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleInputRol" class="form-label">Rol</label>
+                    <input type="text" id="exampleInputRol" class="form-control" placeholder="Pon tu rol"
+                    name="rol" #rol="ngModel" [(ngModel)]="usuarioModel.rol">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Email address</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                  name="email" #email="ngModel" [(ngModel)]="usuarioModel.email">
+                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1"
+                  name="password" #password="ngModel" [(ngModel)]="usuarioModel.password">
+                </div>
+                
+                <button type="submit" class="btn btn-primary" (click)="agregarUsuario()">Submit</button>
+              </form>
+              <br/>
+              <h4 style="text-align: center;" [hidden]="!id"><Strong>Copie este id para activar la empresa: {{id}}</Strong></h4>
+        </div>
+    </div>
+
+</div>

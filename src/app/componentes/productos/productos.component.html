@@ -1,0 +1,190 @@
+<br/>
+<div class="container">
+  <div class="d-grid gap-2 d-md-block">
+    <div class="row">
+      <div class="col-lg-4 col-md-3">
+        <form>
+          <input class="form-control me-2" type="search" placeholder="Nombre" aria-label="Search"
+          name="nombre" #nombre="ngModel" [(ngModel)]="productoFiltro.nombre">
+        </form>
+      </div>
+      <div class="col-lg-4 col-md-3">
+        <form>
+          <input class="form-control me-2" type="search" placeholder="Proveedor" aria-label="Search"
+          name="proveedor" #proveedor="ngModel" [(ngModel)]="productoFiltro.proveedor">
+        </form>
+      </div>
+      <div class="col-lg-4 col-md-3">
+        <form>
+          <div class="row">
+            <div class="col-md-6">
+              <button class="btn btn-outline-secondary" type="submit" style="margin-top: 10px; width: 100%; margin: 0%" (click)=" Descendente()">Descendente</button>
+            </div>
+            <div class="col-md-6">
+              <button class="btn btn-outline-secondary" type="submit" style="margin-top: 10px; width: 100%; margin: 0%;" (click)="Ascendente()" >Ascendete</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 40%;" (click)="obtenerNombres()" [disabled]="!productoFiltro.nombre">Search</button>
+        </div>
+        <div class="col-md-4">
+          <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 40%;" (click)=" obtenerProveedor()" [disabled]="!productoFiltro.proveedor">Search</button>
+        </div>
+      </div>
+<br/>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 50%;" (click)="obtenerProductos()">Reinciar</button>
+
+    </div>
+
+  </div>
+    <br/>
+    <div class="d-flex justify-content-center">
+        <button  style="background-color: black; border: none; width: 50%;" data-bs-toggle="modal" data-bs-target="#modalAgregar" class="btn btn-primary" type="button"><i class="bi bi-plus-square"></i></button>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6" *ngFor="let producto of productoList">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Producto: {{producto.nombre}}</h5>
+              <p class="card-text" style="text-align: center;">Proveedor: {{producto.proveedor}}</p>
+              <p class="card-text" style="text-align: center;">Cantidad Diponible: {{producto.stock}}</p>
+              <p class="card-text" style="text-align: center;">Vendidos: {{producto.vendido}}</p>
+              <a  class="btn btn-primary" type="button" id="dropdownSetting" data-bs-toggle="dropdown" aria-expanded="false">Opciones</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownSetting">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditarProducto" (click)="obtenerId(producto._id)">Editar</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEliminarProducto" (click)="obtenerId(producto._id)">Eliminar</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalSimularVender" (click)="obtenerId(producto._id)" [hidden]="producto.stock == 0" >Comprar</a></li>
+
+              </ul>
+            </div>
+          </div>
+          <br/>
+        </div>
+      </div>
+
+</div>
+
+<!-- agregar Modal -->
+<div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarEmpresa" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalAgregarEmpresa">Creacionde Productos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputNombre1" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputNombre1" aria-describedby="nombreHelp"
+            name="nombre" #nombre="ngModel" [(ngModel)]="productoModel.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputProveedor" class="form-label">Proveedores</label>
+            <input type="text" class="form-control" id="exampleInputProveedor"
+            name="proveedor" #proveedor="ngModel" [(ngModel)]="productoModel.proveedor">
+          </div>
+          <div class="mb-3">
+              <label for="exampleInputStock" class="form-label">Stock</label>
+              <input type="text" class="form-control" id="exampleInputStock"
+              name="stock" #stock="ngModel" [(ngModel)]="productoModel.stock">
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="agregarProducto()">Registrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Editar Modal -->
+<div class="modal fade" id="modalEditarProducto" tabindex="-1" aria-labelledby="modalEditarProducto" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEditarProducto">Creacionde Productos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputNombre1" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="exampleInputNombre1" aria-describedby="nombreHelp"
+            name="nombre" #nombre="ngModel" [(ngModel)]="productoEditar.nombre">
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputProveedor" class="form-label">Proveedores</label>
+            <input type="text" class="form-control" id="exampleInputProveedor"
+            name="proveedor" #proveedor="ngModel" [(ngModel)]="productoEditar.proveedor">
+          </div>
+          <div class="mb-3">
+              <label for="exampleInputStock" class="form-label">Stock</label>
+              <input type="text" class="form-control" id="exampleInputStock"
+              name="stock" #stock="ngModel" [(ngModel)]="productoEditar.stock">
+            </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"(click)="editarProducto()">Actualizar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Eliminar Modal -->
+<div class="modal fade" id="modalEliminarProducto" tabindex="-1" aria-labelledby="modalEliminarProducto" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalEliminarProducto">Creacionde Productos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        ¿Estas seguro de eliminar al producto: {{productoEditar.nombre}}?
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal"(click)="eliminarProductos(productoEditar._id)">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- vender Modal -->
+<div class="modal fade" id="modalSimularVender" tabindex="-1" aria-labelledby="modalSimularVender" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalSimularVender">Creacionde Productos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="mb-3">
+            <label for="exampleInputStock" class="form-label">Stock</label>
+            <input type="text" class="form-control" id="exampleInputStock" aria-describedby="emailHelp"
+            name="stock" #stock="ngModel" [(ngModel)]="productoEditar.stock">
+            <div id="emailHelp" class="form-text">Cantidad disponible.</div>
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputCantidad" class="form-label">Cantidad a comprar</label>
+            <input type="text" class="form-control" id="exampleInputCantidad"
+             name="cantidad" #cantidad="ngModel" [(ngModel)]="productoEditar.cantidad">
+          </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="simularCompra(productoEditar._id, productoEditar.cantidad)">Comprar</button>
+      </div>
+    </div>
+  </div>
+</div>

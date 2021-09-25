@@ -1,0 +1,170 @@
+<br/>
+<div class="container">
+  <div class="d-grid gap-2 d-md-block">
+    <div class="row">
+      <div class="col-lg-3 col-md-3">
+        <form>
+          <input class="form-control me-2" type="search" placeholder="ID" aria-label="Search"
+          name="_id" #_id="ngModel" [(ngModel)]="buscadorModel._id">
+        </form>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <form>
+          <input class="form-control me-2" type="search" placeholder="Nombre" aria-label="Search"
+          name="nombre" #nombre="ngModel" [(ngModel)]="buscadorModel.nombre">
+        </form>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <form>
+          <input class="form-control me-2" type="search" placeholder="Departamento" aria-label="Search"
+          name="departamento" #departamento="ngModel" [(ngModel)]="buscadorModel.departamento">
+        </form>
+      </div>
+      <div class="col-lg-3 col-md-3">
+        <form>
+          <input class="form-control me-2" type="search" placeholder="Puesto" aria-label="Search"
+          name="puesto" #puesto="ngModel" [(ngModel)]="buscadorModel.puesto">
+        </form>
+      </div>
+      
+      <div class="row">
+        <div class="col-md-3">
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 40%;" [disabled]="!buscadorModel._id" (click)="buscadorId(buscadorModel._id)">Search</button>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 40%;" [disabled]="!buscadorModel.nombre" (click)="buscadorName(buscadorModel.nombre)">Search</button>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 40%;" [disabled]="!buscadorModel.departamento" (click)="buscadorDepartamento(buscadorModel.departamento)">Search</button>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="d-flex justify-content-center">
+            <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 40%;" [disabled]="!buscadorModel.puesto" (click)="buscadorPuesto(buscadorModel.puesto)">Search</button>
+          </div>        </div>
+      </div>
+<br/>
+    </div>
+    <div class="d-flex justify-content-center">
+      <button class="btn btn-outline-success" type="submit" style="margin-top: 10px; width: 50%;" (click)="obtenerEmpleados()">Reinciar</button>
+
+    </div>
+
+  </div>
+    <div class="d-flex justify-content-center">
+        <button  style="background-color: black; border: none; width: 50%;" data-bs-toggle="modal" data-bs-target="#modalAgregar" class="btn btn-primary" type="button"><i class="bi bi-plus-square"></i></button>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-6" *ngFor="let empleado of empleadosList">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">Nombre: {{empleado.nombre}}</h5>
+              <p class="card-text">Departamento: {{empleado.departamento}}</p>
+              <p class="card-text">Puesto: {{empleado.puesto}}</p>
+              <a  class="btn btn-primary" type="button" id="dropdownSetting" data-bs-toggle="dropdown" aria-expanded="false">Opciones</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownSetting">
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditarEmpresa" (click)="obtenerEmpleadoIs(empleado._id)" >Editar</a></li>
+                <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEliminarEmpresa" (click)="obtenerEmpleadoIs(empleado._id)" >Eliminar</a></li>
+
+              </ul>
+            </div>
+          </div>
+          <br/>
+        </div>
+      </div>
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="modalAgregar" tabindex="-1" aria-labelledby="modalAgregarEmpresa" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAgregarEmpresa">Creacionde Empleados</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputNombre1" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="exampleInputNombre1" aria-describedby="nombreHelp"
+              name="nombre" #nombre="ngModel" [(ngModel)]="ModelEmpleados.nombre">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputDepartamento" class="form-label">Departamento</label>
+              <input type="text" class="form-control" id="exampleInputDepartamento"
+              name="departamento" #departamento="ngModel" [(ngModel)]="ModelEmpleados.departamento">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPuesto" class="form-label">Puesto</label>
+                <input type="text" class="form-control" id="exampleInputPuesto"
+                name="puesto" #puesto="ngModel" [(ngModel)]="ModelEmpleados.puesto">
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="crearEmpleados()">Registrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Editar -->
+<div class="modal fade" id="modalEditarEmpresa" tabindex="-1" aria-labelledby="modalEditarEmpresa" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEditarEmpresa">Editar Empleados</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="exampleInputNombre1" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="exampleInputNombre1" aria-describedby="nombreHelp"
+              name="nombre" #nombre="ngModel" [(ngModel)]="empleadoModel.nombre">
+            </div>
+            <div class="mb-3">
+              <label for="exampleInputDepartamento" class="form-label">Departamento</label>
+              <input type="text" class="form-control" id="exampleInputDepartamento"
+              name="departamento" #departamento="ngModel" [(ngModel)]="empleadoModel.departamento">
+            </div>
+            <div class="mb-3">
+                <label for="exampleInputPuesto" class="form-label">Puesto</label>
+                <input type="text" class="form-control" id="exampleInputPuesto"
+                name="puesto" #puesto="ngModel" [(ngModel)]="empleadoModel.puesto">
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="editarEmpleados()">Editar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+   <!-- Modal Eliminar -->
+<div class="modal fade" id="modalEliminarEmpresa" tabindex="-1" aria-labelledby="modalEliminarEmpresa" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalEliminarEmpresa">Eliminar Empleados</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            ¿Estas seguro de eliminar al empleado {{empleadoModel.nombre}}?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="eliminarEmpleados(empleadoModel._id)">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>

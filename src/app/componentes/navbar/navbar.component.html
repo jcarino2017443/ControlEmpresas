@@ -1,0 +1,51 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" >Control Empresas</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="!_usuarioService.obtenerIdentidad(); else avaliable">
+          <li class="nav-item">
+            <a class="nav-link "  routerLink="/login" >Login</a>
+          </li>
+          
+        </ul>
+        <!-- <ul class="navbar-nav me-auto mb-2 mb-lg-0" *ngIf="_usuarioService.obtenerIdentidad().rol ==='Rol_Admin'">
+          <li class="nav-item">
+            <a class="nav-link "  routerLink="/panel" >Panel</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" (click)="cerrarSesion()">Cerrar Sesion</a>
+          </li>
+        </ul> -->
+        <ng-template #avaliable>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item" [hidden]="_usuarioService.obtenerIdentidad().rol !=='Rol_Admin'">
+              <a class="nav-link "  routerLink="/panel" >Panel</a>
+            </li>
+            <li class="nav-item" [hidden]="_usuarioService.obtenerIdentidad().rol !=='Rol_Admin'">
+              <a class="nav-link" routerLink="registro">Registro</a>
+            </li>
+            <li class="nav-item" [hidden]="_usuarioService.obtenerIdentidad().rol ==='Rol_Admin'">
+              <a class="nav-link" routerLink="empleados">Empleados</a>
+            </li>
+            <li class="nav-item" [hidden]="_usuarioService.obtenerIdentidad().rol ==='Rol_Admin'">
+              <a class="nav-link" routerLink="reportes">Reportes</a>
+            </li>
+            <li class="nav-item" [hidden]="_usuarioService.obtenerIdentidad().rol ==='Rol_Admin'">
+              <a class="nav-link" routerLink="estadisticas">Estadisticas</a>
+            </li>
+            <li class="nav-item" [hidden]="_usuarioService.obtenerIdentidad().rol ==='Rol_Admin'">
+              <a class="nav-link" routerLink="productos">Productos</a>
+            </li>
+          </ul>
+          <div class="d-flex">
+            <a  class="nav-link text-light">{{_usuarioService.obtenerIdentidad().username}}</a>
+            <a class="nav-link active" aria-current="page" (click)="cerrarSesion()">Cerrar Sesion</a>
+          </div>
+        </ng-template>
+        
+      </div>
+    </div>
+  </nav>

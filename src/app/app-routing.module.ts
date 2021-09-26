@@ -8,16 +8,19 @@ import { RegistroComponent } from './componentes/registro/registro.component';
 import { ReportesComponent } from './componentes/reportes/reportes.component';
 import {ProductosComponent} from './componentes/productos/productos.component'
 import { HomeComponent } from './componentes/home/home.component';
+
+import { RestriccionService } from './servicios/restriccion.service';
+
 const routes: Routes = [
 
 {path: 'login', component:LoginComponent},
-{path: 'registro', component:RegistroComponent},
-{path: 'panel', component:PanelComponent},
-{path: 'empleados', component: EmpleadosComponent},
-{path: 'reportes', component: ReportesComponent},
-{path: 'estadisticas', component: EstadisticasComponent},
-{path: 'productos', component: ProductosComponent},
-{path: 'home', component:HomeComponent},
+{path: 'registro', component:RegistroComponent, canActivate: [RestriccionService]},
+{path: 'panel', component:PanelComponent,canActivate: [RestriccionService]},
+{path: 'empleados', component: EmpleadosComponent,canActivate: [RestriccionService]},
+{path: 'reportes', component: ReportesComponent,canActivate: [RestriccionService]},
+{path: 'estadisticas', component: EstadisticasComponent,canActivate: [RestriccionService]},
+{path: 'productos', component: ProductosComponent,canActivate: [RestriccionService]},
+{path: 'home', component:HomeComponent,canActivate: [RestriccionService]},
 {path: '**', component:LoginComponent}
 
 

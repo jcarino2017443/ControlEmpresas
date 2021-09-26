@@ -46,7 +46,7 @@ export class ProductosComponent implements OnInit {
       Swal.fire({
         position: 'center',
         icon: 'error',
-        title: err.error.errors,
+        title: err.error.mensaje,
         showConfirmButton: false,
         timer: 1500
       })

@@ -32,6 +32,7 @@ export class PanelComponent implements OnInit {
         showConfirmButton: false,
         timer: 1500
       })
+      this.obtenerEmpresas();
     }, err=>{
       console.log(<any>err)
       Swal.fire({
@@ -59,11 +60,12 @@ export class PanelComponent implements OnInit {
   }
   eliminarEmpresa(id:any){
     this._empresaService.eliminarEmpresa(id).subscribe(response=>{
+      console.log(response)
       this.obtenerEmpresas();
       Swal.fire({
         position: 'center',
         icon: 'success',
-        title: 'Empresa Editada',
+        title: 'Empresa Eliminada',
         showConfirmButton: false,
         timer: 1500
       })

@@ -64,9 +64,10 @@
         <div class="col-sm-6" *ngFor="let empleado of empleadosList">
           <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Nombre: {{empleado.nombre}}</h5>
+              <h5 class="card-title" style="text-align: center;">Nombre: {{empleado.nombre}}</h5>
               <p class="card-text">Departamento: {{empleado.departamento}}</p>
               <p class="card-text">Puesto: {{empleado.puesto}}</p>
+              <p class="card-text">identificacion: {{empleado._id}}</p>
               <a  class="btn btn-primary" type="button" id="dropdownSetting" data-bs-toggle="dropdown" aria-expanded="false">Opciones</a>
               <ul class="dropdown-menu" aria-labelledby="dropdownSetting">
                 <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditarEmpresa" (click)="obtenerEmpleadoIs(empleado._id)" >Editar</a></li>

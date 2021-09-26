@@ -20,7 +20,7 @@
           </li>
         </ul> -->
         <ng-template #avaliable>
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
             <li class="nav-item" [hidden]="_usuarioService.obtenerIdentidad().rol !=='Rol_Admin'">
               <a class="nav-link "  routerLink="/panel" >Panel</a>
             </li>
@@ -40,8 +40,8 @@
               <a class="nav-link" routerLink="productos">Productos</a>
             </li>
           </ul>
-          <div class="d-flex">
-            <a  class="nav-link text-light">{{_usuarioService.obtenerIdentidad().username}}</a>
+          <div class="d-flex" *ngIf="identidad">
+            <a  class="nav-link text-light">{{_usuarioService.obtenerIdentidad().rol}}</a>
             <a class="nav-link active" aria-current="page" (click)="cerrarSesion()">Cerrar Sesion</a>
           </div>
         </ng-template>

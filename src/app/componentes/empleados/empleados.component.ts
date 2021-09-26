@@ -27,14 +27,28 @@ export class EmpleadosComponent implements OnInit {
 
   crearEmpleados(){
     this._empleadoService.crearEmpleado(this.ModelEmpleados).subscribe(reponse=>{
-      this.obtenerEmpleados()
-      Swal.fire({
-        position: 'top-end',
-        icon: 'success',
-        title: 'Usuario Logiado',
-        showConfirmButton: false,
-        timer: 1500
-      })
+      if((this.ModelEmpleados.nombre = "") || (this.ModelEmpleados.departamento = "") || (this.ModelEmpleados.puesto ="")){
+        Swal.fire({
+          position: 'center',
+          icon: 'error',
+          title: 'Debe llenar todos los campos',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      }else{
+        this.ModelEmpleados.nombre = "";
+        this.ModelEmpleados.departamento = "";
+        this.ModelEmpleados.puesto ="";
+        this.obtenerEmpleados()
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Usuario Logiado',
+          showConfirmButton: false,
+          timer: 1500
+        })  
+      }
+      
     },err=>{
       console.log(<any>err)
     })
@@ -86,6 +100,21 @@ export class EmpleadosComponent implements OnInit {
   buscadorId(id:any){
     this._empleadoService.obtenerID(id).subscribe(response=>{
       this.empleadosList = response.idEncontrado;
+      Swal.fire({
+        position: 'center',
+        icon: 'success',
+        title: 'Empleado encontrado',
+        showConfirmButton: false,
+        timer: 1500
+      })
+    },err=>{
+      Swal.fire({
+        position: 'center',
+        icon: 'error',
+        title: err.error.mensaje,
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
   }
 

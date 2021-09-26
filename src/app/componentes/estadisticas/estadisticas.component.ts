@@ -38,6 +38,7 @@ export class EstadisticasComponent implements OnInit {
 
   mostrarResultado(){
     this._productoService.mostrarEstadisticas().subscribe(reponse=>{
+      
       this.resultadosArray = reponse.resultados;
       for (let index = 0; index < this.resultadosArray.length; index++) {
         this.chartLabels.push(this.resultadosArray[index].nombre)
@@ -49,8 +50,9 @@ export class EstadisticasComponent implements OnInit {
 
   ventasMas(){
     this._productoService.masVendidos().subscribe(response=>{
-      this.resultadoList = response.hola;
-      this.largo = response.hola.length;
+      console.log(response.encontrado)
+      this.resultadoList = response.encontrado;
+      this.largo = response.encontrado.length;
     })
   }
 

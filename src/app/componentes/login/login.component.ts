@@ -42,14 +42,44 @@ export class LoginComponent implements OnInit, DoCheck {
       Swal.fire({
         position: 'top-end',
         icon: 'success',
-        title: 'Usuario Logiado',
+        title: 'Bienvenido',
         showConfirmButton: false,
         timer: 1500
       })
       this._router.navigate(['/home'])
+      setInterval(()=>{window.location.reload()},2000)
       
     }, error=>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: error.error.mensaje,
+        showConfirmButton: false,
+        timer: 1500
+      })
       console.log(<any>error)
+    })
+  }
+
+  inicioApp(){
+    this._usuarioService.IniciarApp().subscribe(response=>{
+      console.log(response.correoEncontrado);
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: 'Bienvenido',
+        showConfirmButton: false,
+        timer: 1500
+      })
+
+    },err=>{
+      Swal.fire({
+        position: 'top-end',
+        icon: 'error',
+        title: err.error.mensaje,
+        showConfirmButton: false,
+        timer: 1500
+      })
     })
   }
 

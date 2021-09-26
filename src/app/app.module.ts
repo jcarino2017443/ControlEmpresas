@@ -17,6 +17,10 @@ import { ChartsModule } from '@rinminase/ng-charts';
 import { ProductosComponent } from './componentes/productos/productos.component';
 import { HomeComponent } from './componentes/home/home.component';
 
+//servicioa
+import { UsuariosService } from './servicios/usuarios.service';
+import { RestriccionService } from './servicios/restriccion.service';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +41,7 @@ import { HomeComponent } from './componentes/home/home.component';
     HttpClientModule,
     ChartsModule
   ],
-  providers: [],
+  providers: [UsuariosService, RestriccionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

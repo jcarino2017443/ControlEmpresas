@@ -31,6 +31,14 @@ export class UsuariosService {
     return this._http.post(this.ruta + 'agregarUsuario', params, {headers: headersVariable});
    }
 
+   IniciarApp():Observable<any>{
+     var parametro
+    let params = JSON.stringify(parametro);
+
+    let headersVariable = new HttpHeaders().set('Content-Type', 'application/json');
+    return this._http.post(this.ruta + 'Iniciar', parametro,{headers:headersVariable});
+   }
+
    obtenerIdentidad(){
      var identidad2 = JSON.parse(this.localStorage) ;
      if(identidad2 != 'undefined'){

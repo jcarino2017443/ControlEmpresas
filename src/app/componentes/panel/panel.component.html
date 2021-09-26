@@ -11,6 +11,7 @@
             <div class="card-body">
               <h5 class="card-title">nombre: {{empresa.nombre}}</h5>
               <p class="card-text">Propietario: {{empresa.propietario}}</p>
+              
               <a  class="btn btn-primary" type="button" id="dropdownSetting" data-bs-toggle="dropdown" aria-expanded="false">Opciones</a>
               <ul class="dropdown-menu" aria-labelledby="dropdownSetting">
                 <li><a class="dropdown-item" data-bs-toggle="modal" data-bs-target="#modalEditarEmpresa" (click)="obtenerEmpresaId(empresa._id)">Editar</a></li>
@@ -99,7 +100,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="eliminarEmpresa(empresaModel._id)">Si</button>
+        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="eliminarEmpresa(empresaModel.propietario)">Si</button>
       </div>
     </div>
   </div>
